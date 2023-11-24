@@ -1,39 +1,42 @@
-import { useState } from "react";
-function RandomCocktails (){
-    // je déclare une variable usestate (pour obtenir un cocktail random dans un tableau élément)
-    const [cocktailRandom, setCocktailRandom] = useState(null);
+import { useEffect, useState } from "react";
 
-    // ma boucle iff me permet de vérifier que cocktailrandom n'est pas null
-    if(!cocktailRandom){
-        (async ()=>{
-            const coktailsResponse = await fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php"); // Ma var coktailResponse récupere depuis ma base de donnée un élément de mon tab aléatoirement
-            const CocktailJs = await coktailsResponse.json() // ma var CocktailJs traite la réponse obtenue de cockTailresponse en json
-           
+function RandomPageCocktails() {
+  const [coktailRandom, setCocktailRandom] = useState(null); // valeur initial de setcocktailrandom null
 
-            setCocktailRandom(CocktailJs.drinks[0]);  // je récup la valeurs de mon tableau
-          })();
-    }
+  // useEffect est une fonction que react me fournit
+  // et qui permet d'exécuter du code uniquement à certains
+  // chargements du composant (soit le premier, soit à chaque fois etc)
+  // Ici, vu qu'on place un tableau vide en deuxième parametre
+  // de use effect
+  // ça signifie qu'on veut executer la fonction une seule fois
+  // au premier chargement du composant
+  useEffect(() => {
+    // sauver moi jpp svp aider moi
+    (async () => {
+      const cocktailRandomResponse = await fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php"); // chargement des composants de mon tableau dans une variable
+      const cocktailJs = await cocktailRandomResponse.json(); // importation de mes composants en json
 
-       
-    
+      setCocktailRandom(cocktailJs.drinks[0]);
+    })();
+  }, []);
 
-       return (
+  return (
+    <main>
+      {coktailRandom !== null ? (
+        //Je retourne  la variable RandomCocktail. Si Random Cocktail n'est pas nul a
+        <article>
 
-        <>
-         <p>RANDOM</p>
-         <main>
-                {/* Si cocktail est chargé j'affiche en titre le nom de mon élément aléatoire  */}
-            {cocktailRandom ?(
-
-             <article>
-                <h1>{cocktailRandom.strDrink} </h1>
-             </article>
-            ) :(
-                // sinon j'affiche un message de chargement
-              <p>Coktail en chargement</p>
-            )}
-         </main>
-        </>
-    )
+          <h1>{coktailRandom.strDrink}</h1>
+          {/*  affiche le nom du cocktail */}
+          <img src={coktailRandom.strDrinkThumb} alt={coktailRandom.strDrink} />
+            {/*  affiche l'image du cocktail */}
+        </article>
+      ) : (
+        // sinon affiche =>
+        <p>Cocktail en chargement</p>
+      )}
+    </main>
+  );
 }
-export default RandomCocktails
+
+export default RandomPageCocktails;
