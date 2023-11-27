@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import Header from "../component/Header";
 function Ingr() {
     const [ingredient, setIngredient] = useState(null);
 
@@ -15,6 +15,7 @@ function Ingr() {
 
     return (
         <>
+        <Header/>
             {ingredient !== null ? (
                 <section>
                     {ingredient.map((cocktailIngr) => {

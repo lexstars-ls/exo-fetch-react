@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "../component/Header";
 
 function CategoriesPage (){
 
@@ -14,6 +15,8 @@ useEffect(()=>{
 
 
  return(
+  <>
+  <Header/>
     <main>
     
         
@@ -31,6 +34,7 @@ useEffect(()=>{
       <p>En cours de chargement</p>
     )}
   </main>
+  </>
  )
 }
 export default CategoriesPage

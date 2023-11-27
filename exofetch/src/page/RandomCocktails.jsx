@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import CocktailCard from "../component/CocktailsCard";
+import Header from "../component/Header";
 function RandomPageCocktails() {
   const [coktailRandom, setCocktailRandom] = useState(null); // valeur initial de setcocktailrandom null
 
@@ -21,21 +22,18 @@ function RandomPageCocktails() {
   }, []);
 
   return (
+    <>
+    <Header/>
     <main>
       {coktailRandom !== null ? (
         //Je retourne  la variable RandomCocktail. Si Random Cocktail n'est pas nul a
-        <article>
-
-          <h1>{coktailRandom.strDrink}</h1>
-          {/*  affiche le nom du cocktail */}
-          <img src={coktailRandom.strDrinkThumb} alt={coktailRandom.strDrink} />
-            {/*  affiche l'image du cocktail */}
-        </article>
+        <CocktailCard cocktailToDisplay={coktailRandom}/>
       ) : (
         // sinon affiche =>
         <p>Cocktail en chargement</p>
       )}
     </main>
+    </>
   );
 }
 

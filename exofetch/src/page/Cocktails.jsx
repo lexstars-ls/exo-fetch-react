@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Header from "../component/Header";
+import CocktailCard from "../component/CocktailsCard";
 function Cocktails() {
 
     const [cocktails, setCocktails] = useState(null);
@@ -28,25 +30,20 @@ function Cocktails() {
       }
     
       return (
+        <>
+        <Header/>
         <main>
-          {cocktails ? (
-            <>
-              {cocktails.map((cocktail) => {
-                return (
-                  <article>
-                    <h2>{cocktail.strDrink}</h2>
-                    <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
-                    <p>Categorie : {cocktail.strCategory}</p>
-                    <p>Instructions : {cocktail.strInstructions}</p>
-                    <Link to={`/cocktails/details/${cocktail.idDrink}`}>recette et plus</Link>
-                  </article>
-                );
-              })}
-            </>
+        {cocktails ? (
+          <>
+            {cocktails.map((cocktail) => {
+              return <CocktailCard cocktailToDisplay={cocktail} />;
+            })}
+          </>
           ) : (
             <p>Cocktails en cours de chargement</p>
           )}
         </main>
+        </>
       );
     }
 
