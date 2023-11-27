@@ -6,7 +6,7 @@ function HomePage (){
     return (
         <>
 
-        <Ingr/>
+        <Cocktails/>
         <h1>home page youoyu</h1>
 
         <li></li>

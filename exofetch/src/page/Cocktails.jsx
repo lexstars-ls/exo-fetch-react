@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 function Cocktails() {
 
     const [cocktails, setCocktails] = useState(null);
@@ -38,6 +38,7 @@ function Cocktails() {
                     <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
                     <p>Categorie : {cocktail.strCategory}</p>
                     <p>Instructions : {cocktail.strInstructions}</p>
+                    <Link to={`/cocktails/details/${cocktail.idDrink}`}>recette et plus</Link>
                   </article>
                 );
               })}
